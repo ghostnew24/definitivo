@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoselin </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #be185d;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #ec4899;
+            font-weight: 300;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(190, 24, 93, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(190, 24, 93, 0.2);
+            border-color: #ec4899;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+        }
+
+        .dish-card h2 {
+            font-size: 24px;
+            color: #be185d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .dish-card:hover h2 {
+            color: #ec4899;
+        }
+
+        .dish-card p {
+            font-size: 14px;
+            color: #9f1239;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #be185d;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ec4899;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 3px solid #fce7f3;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            color: #be185d;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .modal-subtitle {
+            font-size: 16px;
+            color: #ec4899;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Updated styles for description paragraph */
+        .dish-description {
+            font-size: 16px;
+            color: #9f1239;
+            line-height: 1.8;
+            padding: 20px;
+            background: #fdf2f8;
+            border-radius: 8px;
+            border-left: 4px solid #ec4899;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MEALMIND</h1>
+            <p class="subtitle">Eat smart, live better
+
+        <div class="dishes-grid">
+            <!-- Updated dish names and cards with new dishes -->
+            <div class="dish-card">
+                <h2 onclick="openModal('salmon')">Salmon Salad with Avocado</h2>
+                <p>Weight loss / Healthy lifestyle</p>
+            </div>
+            <div class="dish-card">
+                <h2 onclick="openModal('chicken')">Grilled Chicken with Broccoli</h2>
+                <p>General healthy lifestyle</p>
+            </div>
+            <div class="dish-card">
+                <h2 onclick="openModal('oatmeal')">Oatmeal Bowl with Banana</h2>
+                <p>Weight gain</p>
+            </div>
+            <div class="dish-card">
+                <h2 onclick="openModal('smoothie')">Mango Tropical Smoothie</h2>
+                <p>Energy and vitality</p>
+            </div>
+            <div class="dish-card">
+                <h2 onclick="openModal('pasta')">Pasta with Pesto and Chicken</h2>
+                <p>Athletes / Healthy lifestyle</p>
+            </div>
+            <div class="dish-card">
+                <h2 onclick="openModal('vegetables')">Roasted Vegetables Plate</h2>
+                <p>Nutrition and wellness</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img id="modalImage" class="modal-image" src="/placeholder.svg" alt="Dish">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <!-- Changed to show dish description instead of benefits -->
+            <p id="modalDescription" class="dish-description"></p>
+        </div>
+    </div>
+
+    <script>
+        const dishes = {
+            <!-- Replaced all dish objects with new ones using provided images -->
+            salmon: {
+                name: 'Salmon Salad with Avocado and Spinach',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-11-02%20at%206.58.52%20PM-Q8h97sTIOoUneFurL2kdEDnd3fBKAC.jpeg',
+                description: 'A delicious and nutritious salad combining fresh salmon fillet, creamy avocado, and nutrient-rich spinach. This dish is packed with omega-3 fatty acids, vitamins, and minerals. Perfect for those looking to maintain a healthy weight while enjoying a satisfying meal rich in quality protein.'
+            },
+            chicken: {
+                name: 'Grilled Chicken with Broccoli and Sweet Potato',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-bFAOkc0uafHGP6vJRWj9TNfLHjbCkH.jpeg',
+                description: 'Tender grilled chicken breast served with fresh steamed broccoli and roasted sweet potato. This balanced meal provides lean protein, complex carbohydrates, and essential nutrients. Ideal for athletes and anyone maintaining an active lifestyle.'
+            },
+            oatmeal: {
+                name: 'Oatmeal Bowl with Banana, Granola and Honey',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-vJuqqQpj2p7qyAtPoxilZTxe7VoRci.jpeg',
+                description: 'A wholesome breakfast bowl featuring creamy Greek yogurt, crunchy granola, fresh banana slices, and a drizzle of honey. This delightful combination provides sustained energy, probiotics, and essential nutrients to start your day right.'
+            },
+            smoothie: {
+                name: 'Mango Tropical Smoothie',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-ibO3fzbfw001uqd1O31y54u8FjTnVh.jpeg',
+                description: 'A refreshing tropical smoothie blended with fresh mango, passion fruit, and other exotic fruits. Rich in vitamins C and A, antioxidants, and natural energy. Perfect for a quick breakfast or post-workout refreshment.'
+            },
+            pasta: {
+                name: 'Whole Grain Pasta with Chicken and Pesto',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-0QGtglBvYBetLHqGZBqC2vALshlILB.jpeg',
+                description: 'Perfectly cooked whole grain pasta tossed with grilled chicken breast, fresh homemade basil pesto, and cherry tomatoes. This nutritious meal combines lean protein with complex carbohydrates and fresh vegetables for optimal performance.'
+            },
+            vegetables: {
+                name: 'Roasted Vegetables Selection',
+                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-XzdylNDLIYCztDt9xq6zBUchQzWxJu.jpeg',
+                description: 'A colorful medley of roasted vegetables including bell peppers, carrots, and broccoli with seasonal produce. Bursting with vitamins, minerals, and fiber. This dish supports overall wellness and provides essential nutrients for a healthy lifestyle.'
+            }
+        };
+
+        function openModal(dishId) {
+            const dish = dishes[dishId];
+            document.getElementById('modalImage').src = dish.image;
+            document.getElementById('modalTitle').textContent = dish.name;
+            
+            /* Changed to populate description instead of benefits list */
+            document.getElementById('modalDescription').textContent = dish.description;
+            
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+ <h1> MY BEUTIFUL YOSELIN AND THE MUSLIN WOMAN (JULIA) </h1>  
+
+           <h2>PD¨This page was made by Luis, from EIP 2024
+        </h2>
+        
+    </script>
+</body>
+</html>
